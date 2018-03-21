@@ -26,12 +26,12 @@ def write_file(path, data):
 # Add data onto an existing files
 def append_to_file(path, data):
     # 'a' = append
-    with open(path, 'a')
+    with open(path, 'a'):
         file.write(data + '\n')
 
 # Delete the contents of a file
 def delete_file_contents(path):
-    with open(path, 'w')
+    with open(path, 'w'):
         pass
 
 # Read a file and convert each line to set items
