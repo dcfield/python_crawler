@@ -5,8 +5,8 @@ from domain import *
 from general import *
 
 # constants
-PROJECT_NAME = 'link_crawler'
-HOMEPAGE = 'https://novicecompiler.com/'
+PROJECT_NAME = 'dcfield'
+HOMEPAGE = 'http://www.pythonanywhere.com/'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
@@ -44,3 +44,7 @@ def crawl():
     if len(queued_links) > 0:
         print(str(len(queued_links)) + ' links in the queue')
         create_jobs()
+
+
+create_workers()
+crawl()
