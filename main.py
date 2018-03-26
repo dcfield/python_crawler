@@ -3,19 +3,19 @@ from queue import Queue
 from spider import Spider
 from domain import *
 from general import *
+import sys
 
 # constants
 PROJECT_NAME = 'dcfield'
-HOMEPAGE = 'http://www.pythonanywhere.com/'
+HOMEPAGE = input("Enter url: ") or 'http://www.pythonanywhere.com/'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
-NUMBER_OF_THREADS = 1
+NUMBER_OF_THREADS = 100
 
 queue = Queue()
 
 Spider(PROJECT_NAME, HOMEPAGE, DOMAIN_NAME)
-
 
 # Create worker threads (will die when main finishes)
 def create_workers():
