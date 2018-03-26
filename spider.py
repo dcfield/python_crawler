@@ -1,6 +1,7 @@
 from urllib.request import urlopen
 from link_finder import Linkfinder
 from general import *
+from domain import *
 
 
 class Spider:
@@ -29,8 +30,8 @@ class Spider:
     def boot():
         create_project_dir(Spider.project_name)
         create_data_files(Spider.project_name, Spider.base_url)
-        Spider.queue = file_to_set(Spider.queue_file)
-        Spider.crawled = file_to_set(Spider.crawled_file)
+        Spider.queue_set = file_to_set(Spider.queue_file)
+        Spider.crawled_set = file_to_set(Spider.crawled_file)
 
     @staticmethod
     def crawl_page(thread_name, page_url):
@@ -53,7 +54,7 @@ class Spider:
         html_string = ''
         try:
             response = urlopen(page_url)
-            if response.getheader('Content-type') == 'text/html':
+            if 'text/html' in response.getheader('Content-type'):
                 html_bytes = response.read()
                 html_string = html_bytes.decode('utf-8')
 
@@ -63,8 +64,8 @@ class Spider:
 
             return finder.page_links()
 
-        except:
-            print('Error: cannot crawl page')
+        except Exception as e:
+            print(str(e))
             return set()
 
     @staticmethod
@@ -78,7 +79,7 @@ class Spider:
                 continue
 
             # Make sure we don't add a link that points towards a different site
-            if Spider.domain_name not in url:
+            if Spider.domain_name != get_domain_name(url):
                 continue
 
             # Add to waiting list
