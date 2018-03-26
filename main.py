@@ -10,18 +10,20 @@ HOMEPAGE = 'http://www.pythonanywhere.com/'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
-NUMBER_OF_THREADS = 4
+NUMBER_OF_THREADS = 1
 
 queue = Queue()
 
 Spider(PROJECT_NAME, HOMEPAGE, DOMAIN_NAME)
 
+
 # Create worker threads (will die when main finishes)
 def create_workers():
     for _ in range(NUMBER_OF_THREADS):
         t = threading.Thread(target=work)
-        t.daemon = True;
+        t.daemon = True
         t.start()
+
 
 # Do the net job in the queue
 def work():
@@ -37,6 +39,7 @@ def create_jobs():
         queue.put(link)
     queue.join()
     crawl()
+
 
 # Check if items exist in queue. If so, crawl them
 def crawl():

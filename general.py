@@ -26,7 +26,7 @@ def write_file(path, data):
 # Add data onto an existing files
 def append_to_file(path, data):
     # 'a' = append
-    with open(path, 'a'):
+    with open(path, 'a') as file:
         file.write(data + '\n')
 
 # Delete the contents of a file
@@ -37,8 +37,8 @@ def delete_file_contents(path):
 # Read a file and convert each line to set items
 def file_to_set(file_name):
     results = set()
-    with open(file_name, 'rt') as f:
-        for line in f:
+    with open(file_name, 'rt') as file:
+        for line in file:
             results.add(line.replace('\n', ''))
 
     return results
