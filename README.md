@@ -1,5 +1,7 @@
 # Python Web Crawler
 This script will gather all links in a particular website.
 
-- Define the website in main.py
-- Run main.py to start.
+- Origin tutorial is [here](https://github.com/buckyroberts/Spider)
+- Call `python ./python_crawler/main.py`
+- Enter a website to crawl (Default is [http://www.pythonanywhere.com/])
+- Go for coffee
