@@ -11,10 +11,12 @@ class Spider:
     crawled_name = ''
     base_url = ''
     domain_name = ''
-    queue_file = ''
     crawled_file = ''
+    queue_file = ''
+    dead_file = ''
     queue_set = set()
     crawled_set = set()
+    dead_set = set()
 
     def __init__(self, project_name, base_url, domain_name):
         Spider.project_name = project_name
@@ -22,6 +24,7 @@ class Spider:
         Spider.domain_name = domain_name
         Spider.queue_file = Spider.project_name + '/queue.txt'
         Spider.crawled_file = Spider.project_name + '/crawled.txt'
+        Spider.dead_file = Spider.project_name + '/dead.txt'
 
         self.boot()
         self.crawl_page('First spider', Spider.base_url)
@@ -30,8 +33,9 @@ class Spider:
     def boot():
         create_project_dir(Spider.project_name)
         create_data_files(Spider.project_name, Spider.base_url)
-        Spider.queue_set = file_to_set(Spider.queue_file)
         Spider.crawled_set = file_to_set(Spider.crawled_file)
+        Spider.queue_set = file_to_set(Spider.queue_file)
+        Spider.dead_set = file_to_set(Spider.dead_file)
 
     @staticmethod
     def crawl_page(thread_name, page_url):
